@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Brewed & Bound — A Cozy Neighborhood Café</title>
+	<meta name="description" content="Brewed & Bound — specialty coffee, artisan pastries, and light meals. Cozy atmosphere, slow mornings." />
+	<style>
+		/* Palette */
+		:root{
+			--terracotta:#B85C38;
+			--cream:#F6EFE6;
+			--paper:#F3E7D9;
+			--ink:#2F241F;
+			--muted:#8A6E5A;
+			--card:#fffaf6;
+			--shadow: 0 6px 18px rgba(47,36,31,0.12);
+			--radius:12px;
+		}
+
+		/* Base reset */
+		*{box-sizing:border-box}
+		html,body{height:100%}
+		body{
+			margin:0;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+			color:var(--ink);
+			background-color:var(--paper);
+			-webkit-font-smoothing:antialiased;
+			-moz-osx-font-smoothing:grayscale;
+			line-height:1.45;
+			padding:0 1.25rem;
+		}
+
+		/* Linen/parchment texture using layered gradients */
+		body::before{
+			content:"";
+			position:fixed;inset:0;z-index:-1;
+			background:
+				linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.02)),
+				repeating-linear-gradient(90deg, rgba(0,0,0,0.01) 0 1px, transparent 1px 18px),
+				radial-gradient(circle at 10% 10%, rgba(255,255,255,0.06), transparent 12%),
+				var(--paper);
+			mix-blend-mode:normal;
+		}
+
+		/* Container */
+		.wrap{max-width:1100px;margin:0 auto}
+
+		/* Header / Hero */
+		header.hero{
+			min-height:100vh;
+			display:grid;place-items:center;
+			padding:4rem 1rem;
+			text-align:center;
+			position:relative;
+			isolation:isolate;
+		}
+		.brand{
+			font-family: 'Georgia', 'Times New Roman', serif;
+			font-size:3.25rem;
+			letter-spacing:1px;
+			color:var(--ink);
+			margin:0 0 .5rem;
+		}
+		.script-logo{font-family: 'Brush Script MT', 'Lucida Handwriting', cursive; font-size:2.2rem; color:var(--terracotta); display:block}
+		.tagline{color:var(--muted); font-size:1.125rem; margin-bottom:1.75rem; max-width:46ch;margin-left:auto;margin-right:auto}
+		.cta{background:linear-gradient(180deg,var(--terracotta),#9c4428);color:var(--cream);border:0;padding:.9rem 1.4rem;font-weight:600;border-radius:999px;cursor:pointer;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
+		.cta:active{transform:translateY(1px)}
+
+		/* Subtle decorative vignette */
+		.hero-decor{position:absolute;inset:0;pointer-events:none}
+		.hero-decor svg{width:100%;height:100%;opacity:.06}
+
+		/* Sections */
+		section{padding:3.25rem 0}
+		h2{font-family:'Georgia',serif;margin:0 0 1rem;font-size:1.6rem;color:var(--ink)}
+		p.lead{color:var(--muted);max-width:64ch}
+
+		/* Menu grid */
+		.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+		.card{background:var(--card);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow);transition:transform .25s cubic-bezier(.2,.9,.2,1),box-shadow .25s;display:flex;flex-direction:column;min-height:170px}
+		.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(47,36,31,0.14)}
+		.card h3{margin:.25rem 0 .5rem;font-family:'Georgia',serif}
+		.item{display:flex;justify-content:space-between;gap:.75rem;margin:.45rem 0;padding-top:.25rem;border-top:1px dashed rgba(0,0,0,0.03);align-items:center}
+		.item .name{font-weight:600;color:var(--ink)}
+		.item .desc{font-size:.92rem;color:var(--muted)}
+		.price{white-space:nowrap;color:var(--terracotta);font-weight:700}
+
+		/* Gallery */
+		.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+		.photo{border-radius:10px;min-height:110px;overflow:hidden;background:linear-gradient(135deg, #fff7f2, #f6efe6);display:flex;align-items:center;justify-content:center;color:rgba(0,0,0,0.06);font-weight:700}
+		.photo::after{content:"";display:block;width:120%;height:120%;background-image:radial-gradient(circle at 20% 30%, rgba(184,92,56,0.06), transparent 12%);mix-blend-mode:multiply}
+
+		/* Contact */
+		.contact{display:grid;grid-template-columns:1fr 360px;gap:1.25rem;align-items:start}
+		.hours{background:transparent;padding:.9rem;border-radius:10px}
+		form{background:var(--card);padding:1rem;border-radius:10px;box-shadow:var(--shadow)}
+		label{display:block;font-size:.85rem;margin-bottom:.35rem;color:var(--muted)}
+		input,textarea{width:100%;padding:.6rem .7rem;border-radius:8px;border:1px solid rgba(47,36,31,0.06);margin-bottom:.75rem;font-size:.95rem}
+		button[type=submit]{background:var(--terracotta);color:var(--cream);border:0;padding:.6rem .85rem;border-radius:8px;cursor:pointer}
+
+		/* Footer */
+		footer{padding:2rem 0;color:var(--muted);text-align:center;font-size:.9rem}
+
+		/* Responsive tweaks */
+		@media(max-width:980px){
+			.menu-grid{grid-template-columns:repeat(2,1fr)}
+			.gallery{grid-template-columns:repeat(3,1fr)}
+			.contact{grid-template-columns:1fr}
+		}
+		@media(max-width:620px){
+			.brand{font-size:2.25rem}
+			.menu-grid{grid-template-columns:1fr}
+			.gallery{grid-template-columns:repeat(2,1fr)}
+			header.hero{padding:2.75rem 0}
+		}
+	</style>
+</head>
+<body>
+	<header class="hero wrap" id="top">
+		<div>
+			<span class="script-logo">Brewed & Bound</span>
+			<h1 class="brand">A Slow Morning, One Cup at a Time</h1>
+			<p class="tagline">Specialty coffee, flaky artisan pastries, and simple seasonal plates. Come for the coffee — stay for the stories.</p>
+			<div>
+				<button class="cta" id="reserveBtn">Reserve a Table</button>
+			</div>
+		</div>
+		<div class="hero-decor" aria-hidden>
+			<svg viewBox="0 0 800 600" preserveAspectRatio="none">
+				<defs>
+					<radialGradient id="g" cx="20%" cy="10%">
+						<stop offset="0%" stop-color="#B85C38" stop-opacity="1"/>
+						<stop offset="100%" stop-color="#B85C38" stop-opacity="0"/>
+					</radialGradient>
+				</defs>
+				<rect width="800" height="600" fill="url(#g)"/>
+			</svg>
+		</div>
+	</header>
+
+	<main class="wrap">
+		<section id="menu">
+			<h2>Menu</h2>
+			<p class="lead">Handmade with care, sourced thoughtfully. Our menu highlights a rotating selection of single-origin espresso, house-baked pastries, and light plates.</p>
+			<div class="menu-grid" style="margin-top:1rem">
+				<article class="card" aria-labelledby="drinks">
+					<h3 id="drinks">Drinks</h3>
+					<div class="item"><div><div class="name">House Espresso</div><div class="desc">Rich, balanced, crema-forward</div></div><div class="price">$3.50</div></div>
+					<div class="item"><div><div class="name">Cortado</div><div class="desc">Silky, 1:1 espresso to milk</div></div><div class="price">$4.25</div></div>
+					<div class="item"><div><div class="name">Pour Over</div><div class="desc">Single-origin, rotated weekly</div></div><div class="price">$5.00</div></div>
+					<div style="margin-top:auto;color:var(--muted);font-size:.9rem">Add oat or almond milk +$0.50</div>
+				</article>
+				<article class="card" aria-labelledby="food">
+					<h3 id="food">Food</h3>
+					<div class="item"><div><div class="name">Butter Croissant</div><div class="desc">Flaky, layered, oven-warm</div></div><div class="price">$3.75</div></div>
+					<div class="item"><div><div class="name">Avocado Toast</div><div class="desc">Heirloom tomatoes & lemon oil</div></div><div class="price">$8.50</div></div>
+					<div class="item"><div><div class="name">Smoked Salmon Plate</div><div class="desc">Seasonal salad & rye crisp</div></div><div class="price">$12.00</div></div>
+				</article>
+				<article class="card" aria-labelledby="specials">
+					<h3 id="specials">Specials</h3>
+					<div class="item"><div><div class="name">Cardamom Latte</div><div class="desc">Warm spice & silky milk</div></div><div class="price">$5.25</div></div>
+					<div class="item"><div><div class="name">Seasonal Tart</div><div class="desc">Citrus, almond frangipane</div></div><div class="price">$6.00</div></div>
+					<div class="item"><div><div class="name">Weekday Brunch</div><div class="desc">Chef's small plates, rotating</div></div><div class="price">$14.00</div></div>
+				</article>
+			</div>
+		</section>
+
+		<section id="about">
+			<h2>About</h2>
+			<p class="lead">Brewed & Bound began as a pocket of quiet in a busy neighborhood — a place where mornings slow down and the coffee tastes like conversation. We roast thoughtfully, bake daily, and invite you to linger over a book, a friend, or a new idea. Our shop is built on community, good beans, and the belief that small rituals make a day better.</p>
+		</section>
+
+		<section id="gallery">
+			<h2>Gallery</h2>
+			<p class="lead">Moments from the shop — morning light, steamed milk, flaky pastry edges.</p>
+			<div class="gallery" style="margin-top:1rem">
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+			</div>
+		</section>
+
+		<section id="contact">
+			<h2>Contact & Hours</h2>
+			<div class="contact" style="margin-top:1rem">
+				<div class="hours">
+					<p style="margin:0 0 .6rem"><strong>Address:</strong><br/> 42 Maple Lane — Ground Floor, Neighborhood</p>
+					<p style="margin:0 0 .6rem"><strong>Hours:</strong><br/> Mon–Fri: 7:00am – 3:00pm<br/> Sat–Sun: 8:00am – 4:00pm</p>
+					<p style="margin:0 0 .6rem"><strong>Phone:</strong><br/> (555) 012-3456</p>
+					<p style="color:var(--muted);font-size:.95rem">Walk-ins welcome. To reserve a table for 6+, use the form below and we'll confirm availability.</p>
+				</div>
+				<form id="contactForm" aria-label="Contact form">
+					<label for="name">Name</label>
+					<input id="name" name="name" required />
+					<label for="email">Email</label>
+					<input id="email" name="email" type="email" required />
+					<label for="message">Message (date, time, party size)</label>
+					<textarea id="message" name="message" rows="4" required></textarea>
+					<button type="submit">Send Request</button>
+					<div id="formMessage" style="margin-top:.6rem;color:var(--muted);font-size:.95rem"></div>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="wrap">© <strong>Brewed & Bound</strong> — 2026. Made for slow mornings and good company.</div>
+	</footer>
+
+	<script>
+		// Smooth scroll for Reserve CTA
+		document.getElementById('reserveBtn').addEventListener('click', function(){
+			document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'});
+			setTimeout(()=>document.getElementById('name').focus(),600);
+		});
+
+		// Simple form handling (no backend) — show success message
+		const form = document.getElementById('contactForm');
+		const msg = document.getElementById('formMessage');
+		form.addEventListener('submit', function(e){
+			e.preventDefault();
+			const name = form.name.value.trim();
+			const email = form.email.value.trim();
+			const message = form.message.value.trim();
+			if(!name||!email||!message){
+				msg.textContent = 'Please complete all fields.'; return;
+			}
+			// Fake send
+			msg.textContent = 'Thanks — your request has been sent. We will confirm shortly.';
+			form.reset();
+		});
+	</script>
+</body>
+</html>
