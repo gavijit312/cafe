@@ -67,7 +67,7 @@ export default function App() {
               <h3>{it.name}</h3>
               <div style={{marginTop:6, color:'#6b5a4a'}}>{/* description placeholder */}</div>
               <div style={{marginTop:'auto',display:'flex',justifyContent:'space-between',alignItems:'center',gap:8}}>
-                <div style={{fontWeight:700,color:'var(--terracotta'}}>₹{it.price}</div>
+                <div style={{fontWeight:700,color:'var(--terracotta)'}}>₹{it.price}</div>
                 <div style={{display:'flex',gap:8}}>
                   <button onClick={() => addToCart(it)} style={{padding:'6px 10px',borderRadius:8,background:'var(--accent)',color:'#fff',border:'none'}}>Add to cart</button>
                 </div>
