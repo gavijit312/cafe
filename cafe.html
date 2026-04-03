@@ -165,7 +165,103 @@
 	</style>
 </head>
 <body>
-	<div id="root"></div>
+	<header class="hero wrap" id="top">
+		<div>
+			<span class="script-logo">Brewed & Bound</span>
+			<h1 class="brand">A Slow Morning, One Cup at a Time</h1>
+			<p class="tagline">Specialty coffee, flaky artisan pastries, and simple seasonal plates. Come for the coffee — stay for the stories.</p>
+			<div>
+				<button class="cta" id="shopBtn">Shop Now</button>
+			</div>
+		</div>
+		<div class="hero-decor" aria-hidden>
+			<svg viewBox="0 0 800 600" preserveAspectRatio="none">
+				<defs>
+					<radialGradient id="g" cx="20%" cy="10%">
+						<stop offset="0%" stop-color="#B85C38" stop-opacity="1"/>
+						<stop offset="100%" stop-color="#B85C38" stop-opacity="0"/>
+					</radialGradient>
+				</defs>
+				<rect width="800" height="600" fill="url(#g)"/>
+			</svg>
+		</div>
+	</header>
+
+	<main class="wrap">
+		<section id="about">
+			<h2>About</h2>
+			<p class="lead">Brewed & Bound began as a pocket of quiet in a busy neighborhood — a place where mornings slow down and the coffee tastes like conversation. We roast thoughtfully, bake daily, and invite you to linger over a book, a friend, or a new idea. Our shop is built on community, good beans, and the belief that small rituals make a day better.</p>
+		</section>
+
+		<section id="menu">
+			<h2>Menu - Add to Cart</h2>
+			<p class="lead">Handmade with care, sourced thoughtfully. Our menu highlights a rotating selection of single-origin espresso, house-baked pastries, and light plates.</p>
+			<div id="root" style="margin-top:1rem"></div>
+		</section>
+
+		<section id="gallery">
+			<h2>Gallery</h2>
+			<p class="lead">Moments from the shop — morning light, steamed milk, flaky pastry edges.</p>
+			<div class="gallery" style="margin-top:1rem">
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+				<div class="photo">Photo</div>
+			</div>
+		</section>
+
+		<section id="contact">
+			<h2>Contact & Hours</h2>
+			<div class="contact" style="margin-top:1rem">
+				<div class="hours">
+					<p style="margin:0 0 .6rem"><strong>Address:</strong><br/>2/44, Jatin Das nagar, Belghoria, Kolkata</p>
+					<p style="margin:0 0 .6rem"><strong>Hours:</strong><br/> Mon–Fri: 7:00am – 3:00pm<br/> Sat–Sun: 8:00am – 4:00pm</p>
+					<p style="margin:0 0 .6rem"><strong>Phone:</strong><br/> 9241330xxx</p>
+					<p style="color:var(--muted);font-size:.95rem">Walk-ins welcome. To reserve a table for 6+, use the form below and we'll confirm availability.</p>
+				</div>
+				<form id="contactForm" aria-label="Contact form">
+					<label for="name">Name</label>
+					<input id="name" name="name" required />
+					<label for="email">Email</label>
+					<input id="email" name="email" type="email" required />
+					<label for="message">Message (date, time, party size)</label>
+					<textarea id="message" name="message" rows="4" required></textarea>
+					<button type="submit">Send Request</button>
+					<div id="formMessage" style="margin-top:.6rem;color:var(--muted);font-size:.95rem"></div>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="wrap">© <strong>Brewed & Bound</strong> — 2026. Made for slow mornings and good company.</div>
+	</footer>
+
+	<script>
+		// Contact form handling
+		const form = document.getElementById('contactForm');
+		const msg = document.getElementById('formMessage');
+		form.addEventListener('submit', function(e){
+			e.preventDefault();
+			const name = form.name.value.trim();
+			const email = form.email.value.trim();
+			const message = form.message.value.trim();
+			if(!name||!email||!message){
+				msg.textContent = 'Please complete all fields.'; return;
+			}
+			msg.textContent = 'Thanks ❤️ — your request has been sent. We will confirm shortly.';
+			form.reset();
+		});
+
+		// Shop button scroll
+		document.getElementById('shopBtn').addEventListener('click', function(){
+			document.getElementById('menu').scrollIntoView({behavior:'smooth',block:'start'});
+		});
+	</script>
 
 	<!-- React and ReactDOM from CDN -->
 	<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -309,7 +405,6 @@
 			return (
 				<div className="app layout">
 					<main className="catalog">
-						<h1>Cafe Menu</h1>
 						<div className="menu-grid" style={{marginTop: 12}}>
 							{items.map(it => (
 								<article className="card" key={it.id}>
