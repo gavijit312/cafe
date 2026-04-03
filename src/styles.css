@@ -1,4 +1,11 @@
-:root{--accent:#7b5cff}
+:root{
+  --accent:#7b5cff;
+  --terracotta:#B85C38;
+  --ink:#2F241F;
+  --muted:#8A6E5A;
+  --cream:#F6EFE6;
+  --card:#fffaf6
+}
 body{font-family:Inter,system-ui,Arial,sans-serif;margin:0;padding:24px;background:#f7f7fb}
 .app{max-width:640px;margin:0 auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 4px 18px rgba(10,10,20,0.06)}
 .form{display:flex;gap:8px;margin-bottom:12px}
