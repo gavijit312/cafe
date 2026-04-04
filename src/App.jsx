@@ -59,7 +59,14 @@ export default function App() {
 
   const subtotal = useMemo(() => Object.values(cart).reduce((s, it) => s + it.qty * it.price, 0), [cart])
   const deliveryFee = delivery === 'delivery' && subtotal > 0 ? 49 : 0
-  const discount = isStudent ? Math.round(subtotal * 0.10) : 0
+
+  function isValidStudentId(id){
+    if (!id) return false
+    return /^[A-Za-z0-9-]{4,}$/.test(id.trim())
+  }
+
+  const studentIdValid = isValidStudentId(studentId)
+  const discount = (isStudent && studentIdValid) ? Math.round(subtotal * 0.10) : 0
   const total = subtotal - discount + deliveryFee
 
   return (

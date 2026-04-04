@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Cart({ cart, onRemove, onQtyChange, delivery, setDelivery, address, setAddress, subtotal, deliveryFee, total, clearCart, studentDiscount, setStudentDiscount, studentId, setStudentId, discount }){
+export default function Cart({ cart, onRemove, onQtyChange, delivery, setDelivery, address, setAddress, subtotal, deliveryFee, total, clearCart, studentDiscount, setStudentDiscount, studentId, setStudentId, discount, studentIdValid }){
   const items = Object.values(cart)
 
   return (
@@ -38,7 +38,10 @@ export default function Cart({ cart, onRemove, onQtyChange, delivery, setDeliver
           <input type="checkbox" checked={!!studentDiscount} onChange={e=>setStudentDiscount(e.target.checked)} /> Student discount (10%)
         </label>
         {studentDiscount && (
-          <input className="student-id" placeholder="Student ID (optional)" value={studentId} onChange={e=>setStudentId(e.target.value)} style={{marginLeft:12}} />
+          <div style={{display:'flex',alignItems:'center',gap:8,marginTop:8}}>
+            <input className="student-id" placeholder="Student ID" value={studentId} onChange={e=>setStudentId(e.target.value)} />
+            {!studentIdValid && <div style={{color:'crimson',fontSize:12}}>Enter a valid student ID (min 4 alphanumeric)</div>}
+          </div>
         )}
       </div>
 
@@ -50,7 +53,7 @@ export default function Cart({ cart, onRemove, onQtyChange, delivery, setDeliver
       </div>
 
       <div style={{display:'flex',gap:8,marginTop:12}}>
-        <button className="checkout" disabled={items.length===0}>Place Order</button>
+        <button className="checkout" disabled={items.length===0 || (studentDiscount && !studentIdValid)}>Place Order</button>
         <button className="clear" onClick={clearCart} disabled={items.length===0}>Clear</button>
       </div>
     </aside>
