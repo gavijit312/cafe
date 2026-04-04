@@ -140,8 +140,15 @@
 		.summary .row{display:flex;justify-content:space-between;color:var(--muted);margin-bottom:6px}
 		.summary .total{font-size:1.05rem;color:var(--ink)}
 
-		.checkout{flex:1;padding:8px;border-radius:8px;background:var(--terracotta);color:var(--cream);border:0;cursor:pointer;font-weight:600}
+		.checkout{flex:1;min-width:140px;padding:12px 18px;border-radius:999px;background:linear-gradient(180deg,#6b3b29,#3d2417);color:var(--cream);border:0;cursor:pointer;font-weight:700;position:relative;box-shadow:0 10px 26px rgba(45,30,20,0.28), inset 0 2px 0 rgba(255,255,255,0.03);transition:transform .12s ease,box-shadow .12s ease;display:inline-flex;align-items:center;justify-content:center}
+		.checkout:active{transform:translateY(1px) scale(.997);box-shadow:0 6px 16px rgba(45,30,20,0.32)}
 		.checkout:disabled{opacity:0.6;cursor:not-allowed}
+
+		/* Coffee-bean decorative highlights */
+		.checkout::before{
+			content:"";position:absolute;left:50%;top:12px;transform:translateX(-50%) rotate(-18deg);width:44px;height:18px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));opacity:.12;pointer-events:none}
+		.checkout::after{
+			content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-20deg);width:62px;height:30px;border-radius:50% / 60%;box-shadow:inset -5px -4px 0 rgba(0,0,0,0.28), inset 5px 4px 0 rgba(255,255,255,0.04);pointer-events:none;mix-blend-mode:multiply;opacity:.85}
 		.clear{padding:8px;border-radius:8px;background:transparent;border:1px solid #eee;cursor:pointer}
 		.clear:disabled{opacity:0.6;cursor:not-allowed}
 
