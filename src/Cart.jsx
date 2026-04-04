@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Cart({ cart, onRemove, onQtyChange, delivery, setDelivery, address, setAddress, subtotal, deliveryFee, total, clearCart }){
+export default function Cart({ cart, onRemove, onQtyChange, delivery, setDelivery, address, setAddress, subtotal, deliveryFee, total, clearCart, studentDiscount, setStudentDiscount, studentId, setStudentId, discount }){
   const items = Object.values(cart)
 
   return (
@@ -33,9 +33,19 @@ export default function Cart({ cart, onRemove, onQtyChange, delivery, setDeliver
         )}
       </div>
 
+      <div className="student" style={{marginTop:12}}>
+        <label>
+          <input type="checkbox" checked={!!studentDiscount} onChange={e=>setStudentDiscount(e.target.checked)} /> Student discount (10%)
+        </label>
+        {studentDiscount && (
+          <input className="student-id" placeholder="Student ID (optional)" value={studentId} onChange={e=>setStudentId(e.target.value)} style={{marginLeft:12}} />
+        )}
+      </div>
+
       <div className="summary">
         <div className="row"><span>Subtotal</span><span>₹{subtotal}</span></div>
         <div className="row"><span>Delivery</span><span>₹{deliveryFee}</span></div>
+        {discount > 0 && <div className="row"><span>Student Discount</span><span>-₹{discount}</span></div>}
         <div className="row total"><strong>Total</strong><strong>₹{total}</strong></div>
       </div>
 

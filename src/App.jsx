@@ -24,6 +24,10 @@ export default function App() {
   useEffect(() => { localStorage.setItem('cafe-cart', JSON.stringify(cart)) }, [cart])
   useEffect(() => { localStorage.setItem('cafe-delivery', delivery) }, [delivery])
   useEffect(() => { localStorage.setItem('cafe-address', address) }, [address])
+  const [isStudent, setIsStudent] = useState(() => (localStorage.getItem('cafe-student') === '1') || false)
+  const [studentId, setStudentId] = useState(() => localStorage.getItem('cafe-student-id') || '')
+  useEffect(() => { localStorage.setItem('cafe-student', isStudent ? '1' : '0') }, [isStudent])
+  useEffect(() => { localStorage.setItem('cafe-student-id', studentId) }, [studentId])
 
   function addToCart(item) {
     setCart(prev => {
@@ -55,7 +59,8 @@ export default function App() {
 
   const subtotal = useMemo(() => Object.values(cart).reduce((s, it) => s + it.qty * it.price, 0), [cart])
   const deliveryFee = delivery === 'delivery' && subtotal > 0 ? 49 : 0
-  const total = subtotal + deliveryFee
+  const discount = isStudent ? Math.round(subtotal * 0.10) : 0
+  const total = subtotal - discount + deliveryFee
 
   return (
     <div className="app layout">
@@ -88,6 +93,11 @@ export default function App() {
         subtotal={subtotal}
         deliveryFee={deliveryFee}
         total={total}
+        studentDiscount={isStudent}
+        setStudentDiscount={setIsStudent}
+        studentId={studentId}
+        setStudentId={setStudentId}
+        discount={discount}
         clearCart={clearCart}
       />
     </div>
